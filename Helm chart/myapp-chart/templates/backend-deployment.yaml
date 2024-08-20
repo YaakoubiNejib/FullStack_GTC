@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend_app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: backend_app
+  template:
+    metadata:
+      labels:
+        app: backend_app
+    spec:
+      containers:
+      - name: backend
+        image: {{ .Values.image.backend }}
+        ports:
+        - containerPort: {{ .Values.service.backendPort }}
